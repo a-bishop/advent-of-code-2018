@@ -1,5 +1,4 @@
-with open ('day2-input.txt', 'r') as data:
-  input = data.read().splitlines()
+def solve1(input):
   totalCount2 = 0
   totalCount3 = 0
   for string in input:
@@ -21,3 +20,28 @@ with open ('day2-input.txt', 'r') as data:
     if count3 == True:
       totalCount3 += 1
   print(totalCount2 * totalCount3)
+
+def solve2(input):
+  startingIndex = 1
+  i = 0
+  for string in input:
+    letters = list(string)
+    for index, secondString in enumerate(input, start=startingIndex):
+      error = 0
+      secondLetters = list(secondString)
+      for letter, secondLetter in zip(letters, secondLetters):
+        if (letter != secondLetter):
+          errorIndex = string.index(letter)
+          error += 1
+          if error > 1:
+            break
+      if error == 1:
+        letters.pop(errorIndex)
+        print(''.join(letters))
+    startingIndex += 1
+
+with open ('day2-input.txt', 'r') as data:
+  input = data.read().splitlines()
+  solve1(input)
+  solve2(input)
+  
