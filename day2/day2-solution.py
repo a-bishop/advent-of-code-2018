@@ -1,24 +1,17 @@
+from collections import Counter
+
 def solve1(input):
-  totalCount2 = 0
-  totalCount3 = 0
+  totalCount2, totalCount3 = 0, 0
   for string in input:
-    myDict = {}
-    count2 = False
-    count3 = False
-    for letter in string:
-      if letter in myDict:
-        myDict[letter] += 1
-      else:
-        myDict[letter] = 1
-    for item in myDict:
-      if (myDict[item] == 2):
-        count2 = True
-      elif (myDict[item] == 3):
-        count3 = True
-    if count2 == True:
-      totalCount2 += 1
-    if count3 == True:
-      totalCount3 += 1
+    twoUncounted, threeUncounted = True, True
+    c = Counter(string)
+    for k, v in c.items():
+      if (v == 2) & twoUncounted:
+        totalCount2 += 1
+        twoUncounted = False
+      if (v == 3) & threeUncounted:
+        totalCount3 += 1
+        threeUncounted = False
   print(totalCount2 * totalCount3)
 
 def solve2(input):
