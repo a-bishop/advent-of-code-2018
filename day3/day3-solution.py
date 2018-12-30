@@ -4,8 +4,9 @@ def solve1():
   grid1 = [[0 for z in range(1500)] for k in range(1500)]
   result = 0
   for claim in claims:
-    for x in range(claim[1], claim[1] + claim[3]):
-      for y in range(claim[2], claim[2] + claim[4]):
+    n, offx, offy, w, h = claim
+    for x in range(offx, offx + w):
+      for y in range(offy, offy + h):
         grid1[x][y] += 1
   for col in grid1:
     for rowItem in col:
@@ -19,15 +20,16 @@ def solve2():
   for claim in claims:
     not_overlapping.add(claim[0])
   for claim in claims:
-    for x in range(claim[1], claim[1] + claim[3]):
-      for y in range(claim[2], claim[2] + claim[4]):
+    n, offx, offy, w, h = claim
+    for x in range(offx, offx + w):
+      for y in range(offy, offy + h):
         if grid2[x][y] != 0:
-          if claim[0] in not_overlapping:
-            not_overlapping.remove(claim[0])
+          if n in not_overlapping:
+            not_overlapping.remove(n)
           if grid2[x][y] in not_overlapping:
             not_overlapping.remove(grid2[x][y])
         else:
-          grid2[x][y] = claim[0]
+          grid2[x][y] = n
   return list(not_overlapping)
     
 with open ('day3-input.txt', 'r') as data:
