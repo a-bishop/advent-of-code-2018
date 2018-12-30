@@ -16,7 +16,6 @@ def solve1(input):
 
 def solve2(input):
   startingIndex = 1
-  i = 0
   for string in input:
     letters = list(string)
     for index, secondString in enumerate(input, start=startingIndex):
