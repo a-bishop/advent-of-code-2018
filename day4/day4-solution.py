@@ -37,9 +37,9 @@ def solve1():
         countingMins = False
   for k,v in minCounter.most_common(1):
     mostMins = int(k)
-  print(mostMins * int(guardAsleepMost))
+  return mostMins * int(guardAsleepMost)
 
 with open ('day4-input.txt', 'r') as data:
   myInput = data.read().splitlines()
   sortedIn = sorted(myInput, key=lambda dt: (time.strptime(dt[6:17], "%m-%d %H:%M")))
-  solve1()
+  print(solve1())
