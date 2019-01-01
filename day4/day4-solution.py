@@ -19,7 +19,7 @@ def most_mins_asleep():
     return k
 
 def solve1():
-  minCounter = 0
+  minCounter = Counter()
   mins = re.compile(r':(\d+)')
   guardAsleepMost = most_mins_asleep()
   countingMins = False
@@ -32,15 +32,14 @@ def solve1():
       elif 'wakes' in line:
         endMins = int(mins.search(line)[1])
         for i in range(startMins, endMins):
-          minCounter += 1
+          minCounter[i] += 1
       elif ('#' in line) & (guardAsleepMost not in line):
         countingMins = False
-  print(int(minCounter) * int(guardAsleepMost))
+  for k,v in minCounter.most_common(1):
+    mostMins = int(k)
+  print(mostMins * int(guardAsleepMost))
 
 with open ('day4-input.txt', 'r') as data:
   myInput = data.read().splitlines()
   sortedIn = sorted(myInput, key=lambda dt: (time.strptime(dt[6:17], "%m-%d %H:%M")))
-  with open("day4-input-sorted.txt", "w") as f:
-    for line in sortedIn:
-      f.write(line + '\n')
   solve1()
